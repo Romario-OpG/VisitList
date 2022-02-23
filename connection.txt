@@ -1,0 +1,1 @@
+﻿server=localhost;username=root;password=root;database=students_db;convert zero datetime=True;
