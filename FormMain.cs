@@ -84,7 +84,21 @@ namespace visit_list
 
       private async void edit_button_Click(object sender, EventArgs e)
       {
-         var student = db.Students.FirstOrDefault(p => p.Id == int.Parse(id_select_textBox.Text));
+         Student student;
+         try
+         {
+            student = db.Students.FirstOrDefault(p => p.Id == int.Parse(id_select_textBox.Text));
+         }
+         catch (Exception)
+         {
+            MessageBox.Show("Вы ввели несуществующий id");
+
+            id_select_textBox.Clear();
+            id_select_textBox.Focus();
+
+            return;
+         }
+         
          var visit = new Visit()
          {
             Student_id = student.Id,
@@ -214,6 +228,11 @@ namespace visit_list
             dataGridView1.Rows.Add(values.ToArray());
             dataGridView2.Rows.Add(values.ToArray());
          }
+      }
+
+      private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+      {
+
       }
    }
 }
